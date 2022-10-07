@@ -32,10 +32,9 @@ const fetchData = async () => {
 /* From course video Leaflet & GeoJSON */
 const getFeature = (feature, layer) => {
   layer.bindPopup(
-    `<ul>
-        <li>${muPos[x]}</li>
-        <li>${muNeg[x]}</li>
-    </ul>`
+    `${muPos[x]}
+    ${muNeg[x]}
+    `
   );
   x++;
   layer.bindTooltip(feature.properties.nimi);
@@ -48,17 +47,17 @@ const getStyle = (feature) => {
 /* From course video Leaflet & GeoJSON */
 const initMap = (data, data2, data3) => {
   let map = L.map("map", {
-    minZoom: -3
+    minZoom: -3,
   });
   let geoJson = L.geoJSON(data, {
     weight: 2,
     onEachFeature: getFeature,
-    Style: getStyle
+    Style: getStyle,
   }).addTo(map);
 
   let osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
-    attribution: "© OpenStreetMap"
+    attribution: "© OpenStreetMap",
   }).addTo(map);
 
   map.fitBounds(geoJson.getBounds());
